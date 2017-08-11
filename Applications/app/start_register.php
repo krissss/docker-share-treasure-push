@@ -16,6 +16,10 @@ use \GatewayWorker\Register;
 
 $config = require(__DIR__ . '/config.php');
 
+if (!$config['is_register_node']) {
+    return 'skip';
+}
+
 // register 必须是text协议
 $register = new Register('text://' . $config['registerAddress']);
 

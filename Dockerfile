@@ -50,12 +50,17 @@ COPY ./php/ /etc/php/7.0/
 COPY . /app
 WORKDIR /app
 
+# 阿里云可填：[hostname]:1238
 ENV REGISTER_ADDRESS='127.0.0.1:1238'
 ENV WORKER_COUNT=2
 ENV GATEWAY_COUNT=2
+# 阿里云可填：[hostname]
 ENV LAN_IP='127.0.0.1'
+# 0 关闭，1 开启
 ENV CHECK_ORIGIN=0
 ENV HTTP_ORIGIN='http://127.0.0.1'
+# 0 是从服务器，1 是主服务器
+ENV IS_REGISTER_NODE=1
 
 EXPOSE 1238
 EXPOSE 7272

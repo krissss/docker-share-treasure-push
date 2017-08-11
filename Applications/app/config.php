@@ -50,6 +50,9 @@ $config = [
     'checkOrigin' => env('CHECK_ORIGIN', false),
     // 只允许建立 web socket 的网站域名
     'HTTP_ORIGIN' => env('HTTP_ORIGIN', 'http://127.0.0.1'),
+
+    // 是否是注册服务节点，非注册服务节点 start_register.php 不需要执行
+    'is_register_node' => env('IS_REGISTER_NODE', true),
 ];
 
 return $config;
