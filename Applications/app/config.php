@@ -50,9 +50,6 @@ $config = [
     'checkOrigin' => env('CHECK_ORIGIN', false),
     // 只允许建立 web socket 的网站域名
     'HTTP_ORIGIN' => env('HTTP_ORIGIN', 'http://127.0.0.1'),
-
-    // SSL 加密
-    'SSL' => env('SSL', false),
 ];
 
 return $config;

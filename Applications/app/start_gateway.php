@@ -19,19 +19,8 @@ use \Workerman\Autoloader;
 
 $config = require(__DIR__ . '/config.php');
 
-$context = array();
-if ($config['SSL']) {
-    $context = array(
-        'ssl' => array(
-            'local_cert' => '/app/ssl/server.pem', // 或者crt文件
-            'local_pk' => '/app/ssl/server.key',
-            'verify_peer' => false
-        )
-    );
-}
-
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway($config['gatewayUrl'], $context);
+$gateway = new Gateway($config['gatewayUrl']);
 // gateway名称，status方便查看
 $gateway->name = $config['gatewayName'];
 // gateway进程数
@@ -44,20 +33,18 @@ $gateway->startPort = $config['gatewayStartPort'];
 // 服务注册地址
 $gateway->registerAddress = $config['registerAddress'];
 
-if ($config['gatewayPing']) {
+if($config['gatewayPing']){
     // 心跳间隔
     $gateway->pingInterval = $config['gatewayPingInterval'];
     // 心跳数据
     $gateway->pingData = json_encode(['type' => 'ping']);
 }
 
-if ($config['SSL']) {
-    $gateway->transport = 'ssl';
-}
-
 // 当客户端连接上来时，设置连接的onWebSocketConnect，即在websocket握手时的回调
-$gateway->onConnect = function ($connection) use ($config) {
-    $connection->onWebSocketConnect = function ($connection, $http_header) use ($config) {
+$gateway->onConnect = function($connection) use ($config)
+{
+    $connection->onWebSocketConnect = function($connection , $http_header) use ($config)
+    {
         // 可以在这里判断连接来源是否合法，不合法就关掉连接
         // $_SERVER['HTTP_ORIGIN']标识来自哪个站点的页面发起的websocket链接
         if ($config['checkOrigin'] === true
@@ -70,9 +57,9 @@ $gateway->onConnect = function ($connection) use ($config) {
     };
 };
 
-
 // 如果不是在根目录启动，则运行runAll方法
-if (!defined('GLOBAL_START')) {
+if(!defined('GLOBAL_START'))
+{
     Worker::runAll();
 }
 
