@@ -20,19 +20,6 @@ if (!function_exists('host2Ip')) {
     }
 }
 
-if (!function_exists('checkPortCanBind')) {
-    function checkPortCanBind($hostAndPort, &$errno = null, &$errstr = null)
-    {
-        $socket = stream_socket_server("tcp://$hostAndPort", $errno, $errstr);
-        if (!$socket) {
-            return true;
-        }
-        fclose($socket);
-        unset($socket);
-        return false;
-    }
-}
-
 $config = [
     // 服务注册地址
     'registerAddress' => env('REGISTER_ADDRESS', '127.0.0.1:1238'),
@@ -64,8 +51,5 @@ $config = [
     // 只允许建立 web socket 的网站域名
     'HTTP_ORIGIN' => env('HTTP_ORIGIN', 'http://127.0.0.1'),
 ];
-
-// 是否是注册服务节点，非注册服务节点 start_register.php 不需要执行
-$config['is_register_node'] = checkPortCanBind($config['registerAddress']);
 
 return $config;
