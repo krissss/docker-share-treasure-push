@@ -39,6 +39,10 @@ RUN apt-get update && apt-get install -y \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+#设置时区
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+  && echo 'Asia/Shanghai' >/etc/timezone
+
 # 系统内核调优
 # docker ubuntu:16.04 容器中不可用
 #COPY ./system/sysctl.conf /etc/sysctl.conf
