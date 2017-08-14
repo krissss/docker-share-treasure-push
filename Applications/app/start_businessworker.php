@@ -17,7 +17,7 @@ use \GatewayWorker\Gateway;
 use \GatewayWorker\BusinessWorker;
 use \Workerman\Autoloader;
 
-$config = require(__DIR__ . '/config.php');
+$config = require_once(__DIR__ . '/config.php');
 
 // bussinessWorker 进程
 $worker = new BusinessWorker();

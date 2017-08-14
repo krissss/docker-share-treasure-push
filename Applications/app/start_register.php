@@ -14,7 +14,7 @@
 use \Workerman\Worker;
 use \GatewayWorker\Register;
 
-$config = require(__DIR__ . '/config.php');
+$config = require_once(__DIR__ . '/config.php');
 
 if (!$config['is_register_node']) {
     return 'skip';

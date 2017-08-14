@@ -13,7 +13,7 @@ if (!function_exists('env')) {
 if (!function_exists('host2Ip')) {
     function host2Ip($host)
     {
-        if(filter_var($host, FILTER_VALIDATE_IP)){
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
             return $host;
         }
         return gethostbyname($host);
@@ -21,15 +21,15 @@ if (!function_exists('host2Ip')) {
 }
 
 if (!function_exists('checkPortCanBind')) {
-    function checkPortCanBind($hostAndport, &$errno=null, &$errstr=null)
+    function checkPortCanBind($hostAndPort, &$errno = null, &$errstr = null)
     {
-        $socket = stream_socket_server("tcp://$hostAndport", $errno, $errstr);
+        $socket = stream_socket_server("tcp://$hostAndPort", $errno, $errstr);
         if (!$socket) {
-            return false;
+            return true;
         }
         fclose($socket);
         unset($socket);
-        return true;
+        return false;
     }
 }
 
