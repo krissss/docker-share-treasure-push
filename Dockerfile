@@ -63,6 +63,9 @@ ENV LAN_IP='127.0.0.1'
 # 0 关闭，1 开启
 ENV CHECK_ORIGIN=0
 ENV HTTP_ORIGIN='http://127.0.0.1'
+# 0 关闭，1 开启,开启时需要挂在文件
+# /app/ssl/server.pem 和 /app/ssl/server.key
+ENV SSL=0
 
 EXPOSE 1238
 EXPOSE 7272
