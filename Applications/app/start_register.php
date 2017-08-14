@@ -14,7 +14,7 @@
 use \Workerman\Worker;
 use \GatewayWorker\Register;
 
-$config = require_once(__DIR__ . '/config.php');
+$config = require(__DIR__ . '/config.php');
 
 // register 必须是text协议
 $register = new Register('text://' . $config['registerAddress']);
